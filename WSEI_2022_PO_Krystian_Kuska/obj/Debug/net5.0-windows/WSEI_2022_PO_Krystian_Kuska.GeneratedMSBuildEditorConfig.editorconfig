@@ -1,0 +1,10 @@
+is_global = true
+build_property.TargetFramework = net5.0-windows
+build_property.TargetPlatformMinVersion = 7.0
+build_property.UsingMicrosoftNETSdkWeb = 
+build_property.ProjectTypeGuids = 
+build_property.PublishSingleFile = 
+build_property.IncludeAllContentForSelfExtract = 
+build_property._SupportedPlatformList = Android,iOS,Linux,macOS,Windows
+build_property.RootNamespace = WSEI_2022_PO_Krystian_Kuska
+build_property.ProjectDir = D:\VSProjects\WSEI_2022_PO\WSEI_2022_PO\WSEI_2022_PO_Krystian_Kuska\
