@@ -22,7 +22,15 @@ namespace WSEI_2022_PO_Krystian_Kuska
         private SolidColorBrush _snakeBodyBrush = Brushes.Green;
         private SolidColorBrush _snakeHeadBrush = Brushes.YellowGreen;
         private List<SnakePart> _snakeParts = new();
-
+        public enum SnakeDirection
+        {
+            Left,
+            Right,
+            Up,
+            Down
+        };
+        private SnakeDirection _snakeDirection = SnakeDirection.Right;
+        private int _snakeLength;
         //GameBoard
         const int squareSize = 20;
 
@@ -84,6 +92,45 @@ namespace WSEI_2022_PO_Krystian_Kuska
                     Canvas.SetLeft(snakePart.UiElement, snakePart.Position.X);
                 }
             }
+        }
+        private void MoveSnake()
+        { 
+            while (_snakeParts.Count >= _snakeLength)
+            {
+                GameArea.Children.Remove(_snakeParts[0].UiElement);
+                _snakeParts.RemoveAt(0);
+            }
+            foreach (SnakePart snakePart in _snakeParts)
+            {
+                (snakePart.UiElement as Rectangle).Fill = _snakeBodyBrush;
+                snakePart.IsHead = false;
+            }
+
+            SnakePart snakeHead = _snakeParts[_snakeParts.Count - 1];
+            double nextX = snakeHead.Position.X;
+            double nextY = snakeHead.Position.Y;
+            switch (_snakeDirection)
+            {
+                case SnakeDirection.Left:
+                    nextX -= SnakeSquareSize;
+                    break;
+                case SnakeDirection.Right:
+                    nextX += SnakeSquareSize;
+                    break;
+                case SnakeDirection.Up:
+                    nextY -= SnakeSquareSize;
+                    break;
+                case SnakeDirection.Down:
+                    nextY += SnakeSquareSize;
+                    break;
+            }
+            _snakeParts.Add(new SnakePart()
+            {
+                Position = new Point(nextX, nextY),
+                IsHead = true
+            });
+            DrawSnake(); 
+            //CollisionCheck();          
         }
     }
 }
