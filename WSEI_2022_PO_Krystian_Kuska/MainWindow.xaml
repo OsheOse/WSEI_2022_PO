@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Snake"
         SizeToContent="WidthAndHeight"
-        ContentRendered="Window_ContentRenderer">
+        ContentRendered="Window_ContentRendered">
     <Grid>
         <Border BorderBrush="Black" BorderThickness="8">
         <Canvas Name="GameArea" ClipToBounds="True" Width="800" Height="800">

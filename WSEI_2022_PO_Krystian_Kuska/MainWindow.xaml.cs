@@ -15,9 +15,6 @@ using System.Windows.Shapes;
 
 namespace WSEI_2022_PO_Krystian_Kuska
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         const int squareSize = 20;
@@ -25,7 +22,7 @@ namespace WSEI_2022_PO_Krystian_Kuska
         {
             InitializeComponent();
         }
-        private void Window_ContentRenderer(object sender, EventArgs e)
+        private void Window_ContentRendered(object sender, EventArgs e)
         {
             DrawArea();
         }
@@ -38,11 +35,11 @@ namespace WSEI_2022_PO_Krystian_Kuska
 
             while (doneDrawingBackground == false)
             {
-                Rectangle rect = new Rectangle
+                Rectangle rect = new()
                 {
                     Width = squareSize,
                     Height = squareSize,
-                    Fill = nextIsOdd ? Brushes.White : Brushes.Black
+                    Fill = nextIsOdd ? Brushes.White : Brushes.Gray
                 };
                 GameArea.Children.Add(rect);
                 Canvas.SetTop(rect, nextY);
