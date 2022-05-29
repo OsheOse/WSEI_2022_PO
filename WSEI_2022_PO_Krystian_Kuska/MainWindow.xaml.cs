@@ -17,7 +17,15 @@ namespace WSEI_2022_PO_Krystian_Kuska
 {
     public partial class MainWindow : Window
     {
+        //Snake
+        const int SnakeSquareSize = 20;
+        private SolidColorBrush _snakeBodyBrush = Brushes.Green;
+        private SolidColorBrush _snakeHeadBrush = Brushes.YellowGreen;
+        private List<SnakePart> _snakeParts = new();
+
+        //GameBoard
         const int squareSize = 20;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -57,6 +65,24 @@ namespace WSEI_2022_PO_Krystian_Kuska
 
                 if (nextY >= GameArea.ActualHeight)
                     doneDrawingBackground = true;
+            }
+        }
+        private void DrawSnake()
+        {
+            foreach (SnakePart snakePart in _snakeParts)
+            {
+                if (snakePart.UiElement == null)
+                {
+                    snakePart.UiElement = new Rectangle()
+                    {
+                        Width = SnakeSquareSize,
+                        Height = SnakeSquareSize,
+                        Fill = snakePart.IsHead ? _snakeHeadBrush : _snakeBodyBrush
+                    };
+                    GameArea.Children.Add(snakePart.UiElement);
+                    Canvas.SetTop(snakePart.UiElement, snakePart.Position.Y);
+                    Canvas.SetLeft(snakePart.UiElement, snakePart.Position.X);
+                }
             }
         }
     }
