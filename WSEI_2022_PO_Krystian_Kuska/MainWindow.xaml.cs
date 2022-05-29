@@ -11,6 +11,7 @@ namespace WSEI_2022_PO_Krystian_Kuska
     public partial class MainWindow : Window
     {
         private DispatcherTimer _gameTickTimer = new();
+        Random rnd = new();
 
         //Snake
         const int SnakeStartLength = 3;
@@ -32,6 +33,10 @@ namespace WSEI_2022_PO_Krystian_Kuska
         //GameBoard
         const int squareSize = 20;
 
+        //Food
+        private UIElement _snakeFood = null;
+        private SolidColorBrush _foodBrush = Brushes.Red;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -52,7 +57,8 @@ namespace WSEI_2022_PO_Krystian_Kuska
             _snakeDirection = SnakeDirection.Right;
             _snakeParts.Add(new SnakePart() { Position = new Point(SnakeSquareSize * 5, SnakeSquareSize * 5) });
             _gameTickTimer.Interval = TimeSpan.FromMilliseconds(SnakeStartSpeed); 
-            DrawSnake();      
+            DrawSnake();
+            DrawSnakeFood();
             _gameTickTimer.IsEnabled = true;
         }
         private void DrawArea()
@@ -144,6 +150,36 @@ namespace WSEI_2022_PO_Krystian_Kuska
             });
             DrawSnake(); 
             //CollisionCheck();          
+        }
+        private Point GetNextFoodPosition()
+        {
+            int maxX = (int)(GameArea.ActualWidth / SnakeSquareSize);
+            int maxY = (int)(GameArea.ActualHeight / SnakeSquareSize);
+            int foodX = rnd.Next(0, maxX) * SnakeSquareSize;
+            int foodY = rnd.Next(0, maxY) * SnakeSquareSize;
+
+            foreach (SnakePart snakePart in _snakeParts)
+            {
+                if ((snakePart.Position.X == foodX) && (snakePart.Position.Y == foodY))
+                {
+                    return GetNextFoodPosition();
+                }
+            }
+
+            return new Point(foodX, foodY);
+        }
+        private void DrawSnakeFood()
+        {
+            Point foodPosition = GetNextFoodPosition();
+            _snakeFood = new Ellipse()
+            {
+                Width = SnakeSquareSize,
+                Height = SnakeSquareSize,
+                Fill = _foodBrush
+            };
+            GameArea.Children.Add(_snakeFood);
+            Canvas.SetTop(_snakeFood, foodPosition.Y);
+            Canvas.SetLeft(_snakeFood, foodPosition.X);
         }
     }
 }
