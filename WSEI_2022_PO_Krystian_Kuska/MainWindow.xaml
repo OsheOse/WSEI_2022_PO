@@ -5,10 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WSEI_2022_PO_Krystian_Kuska"
         mc:Ignorable="d"
-        Title="MainWindow" Height="800
-        " Width="800">
+        Title="Snake"
+        SizeToContent="WidthAndHeight"
+        ContentRendered="Window_ContentRenderer">
     <Grid>
-        <Border BorderBrush="Black" BorderThickness="8"></Border>
+        <Border BorderBrush="Black" BorderThickness="8">
+        <Canvas Name="GameArea" ClipToBounds="True" Width="800" Height="800">
 
+        </Canvas>
+        </Border>
     </Grid>
 </Window>
