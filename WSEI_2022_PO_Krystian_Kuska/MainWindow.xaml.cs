@@ -1,23 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace WSEI_2022_PO_Krystian_Kuska
 {
     public partial class MainWindow : Window
     {
+        private DispatcherTimer _gameTickTimer = new();
+
         //Snake
+        const int SnakeStartLength = 3;
+        const int SnakeStartSpeed = 400;
+        const int SnakeSpeedThreshold = 100;
         const int SnakeSquareSize = 20;
         private SolidColorBrush _snakeBodyBrush = Brushes.Green;
         private SolidColorBrush _snakeHeadBrush = Brushes.YellowGreen;
@@ -37,10 +35,25 @@ namespace WSEI_2022_PO_Krystian_Kuska
         public MainWindow()
         {
             InitializeComponent();
+            _gameTickTimer.Tick += GameTickTimer_Tick;
+        }
+        private void GameTickTimer_Tick(object sender, EventArgs e)
+        {
+            MoveSnake();
         }
         private void Window_ContentRendered(object sender, EventArgs e)
         {
             DrawArea();
+            StartNewGame();
+        }
+        private void StartNewGame()
+        {
+            _snakeLength = SnakeStartLength;
+            _snakeDirection = SnakeDirection.Right;
+            _snakeParts.Add(new SnakePart() { Position = new Point(SnakeSquareSize * 5, SnakeSquareSize * 5) });
+            _gameTickTimer.Interval = TimeSpan.FromMilliseconds(SnakeStartSpeed); 
+            DrawSnake();      
+            _gameTickTimer.IsEnabled = true;
         }
         private void DrawArea()
         {
