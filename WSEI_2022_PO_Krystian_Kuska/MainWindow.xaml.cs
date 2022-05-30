@@ -18,7 +18,7 @@ namespace WSEI_2022_PO_Krystian_Kuska
         //Snake
         const int SnakeStartLength = 3;
         const int SnakeStartSpeed = 400;
-        const int SnakeSpeedThreshold = 100;
+        const int SnakeSpeedThreshold = 200;
         const int SnakeSquareSize = 20;
         private SolidColorBrush _snakeBodyBrush = Brushes.Green;
         private SolidColorBrush _snakeHeadBrush = Brushes.YellowGreen;
@@ -52,10 +52,14 @@ namespace WSEI_2022_PO_Krystian_Kuska
         private void Window_ContentRendered(object sender, EventArgs e)
         {
             DrawArea();
-            StartNewGame();
+            if (!startingPanel.IsEnabled)
+            {
+                StartNewGame();
+            }
         }
         private void StartNewGame()
         {
+            if (!CheckUsername()) return;
             foreach (SnakePart snakeBodyPart in _snakeParts)
             {
                 if (snakeBodyPart.UiElement != null)
@@ -134,7 +138,8 @@ namespace WSEI_2022_PO_Krystian_Kuska
             }
         }
         private void MoveSnake()
-        { 
+        {
+            if (!_gameTickTimer.IsEnabled) return;
             while (_snakeParts.Count >= _snakeLength)
             {
                 GameArea.Children.Remove(_snakeParts[0].UiElement);
@@ -223,7 +228,7 @@ namespace WSEI_2022_PO_Krystian_Kuska
                     if (_snakeDirection != SnakeDirection.Left)
                         _snakeDirection = SnakeDirection.Right;
                     break;
-                case Key.Space:
+                case Key.Return:
                     StartNewGame();
                     break;
             }
@@ -266,7 +271,32 @@ namespace WSEI_2022_PO_Krystian_Kuska
         }
         private void UpdateGameStatus()
         {
-            Title = "SnakeWPF - Score: " + _currentScore + " - Game speed: " + _gameTickTimer.Interval.TotalMilliseconds;
+            tbStatusScore.Text = _currentScore.ToString();
+        }
+
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            DragMove();
+        }
+        private void BtnClose_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void BtnShowHighscoreList_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private bool CheckUsername()
+        {
+            if (username.Text.Length > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }
