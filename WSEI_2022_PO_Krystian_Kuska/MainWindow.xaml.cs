@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -37,6 +38,7 @@ namespace WSEI_2022_PO_Krystian_Kuska
         //Food
         private UIElement _snakeFood = null;
         private SolidColorBrush _foodBrush = Brushes.Red;
+        private int _currentScore = 0;
 
         public MainWindow()
         {
@@ -54,13 +56,31 @@ namespace WSEI_2022_PO_Krystian_Kuska
         }
         private void StartNewGame()
         {
+            foreach (SnakePart snakeBodyPart in _snakeParts)
+            {
+                if (snakeBodyPart.UiElement != null)
+                {
+                    GameArea.Children.Remove(snakeBodyPart.UiElement);
+                }
+            }
+            _snakeParts.Clear();
+            if (_snakeFood != null)
+            {
+                GameArea.Children.Remove(_snakeFood);
+            }
+            _currentScore = 0;
             _snakeLength = SnakeStartLength;
             _snakeDirection = SnakeDirection.Right;
             _snakeParts.Add(new SnakePart() { Position = new Point(SnakeSquareSize * 5, SnakeSquareSize * 5) });
-            _gameTickTimer.Interval = TimeSpan.FromMilliseconds(SnakeStartSpeed); 
+            _gameTickTimer.Interval = TimeSpan.FromMilliseconds(SnakeStartSpeed);
             DrawSnake();
             DrawSnakeFood();
+            UpdateGameStatus();      
             _gameTickTimer.IsEnabled = true;
+        }
+        private void EndGame()
+        {
+            _gameTickTimer.IsEnabled = false;
         }
         private void DrawArea()
         {
@@ -149,8 +169,8 @@ namespace WSEI_2022_PO_Krystian_Kuska
                 Position = new Point(nextX, nextY),
                 IsHead = true
             });
-            DrawSnake(); 
-            //CollisionCheck();          
+            DrawSnake();
+            DoCollisionCheck();
         }
         private Point GetNextFoodPosition()
         {
@@ -211,6 +231,42 @@ namespace WSEI_2022_PO_Krystian_Kuska
             {
                 MoveSnake();
             }
+        }
+        private void DoCollisionCheck()
+        {
+            SnakePart snakeHead = _snakeParts[_snakeParts.Count - 1];
+
+            if ((snakeHead.Position.X == Canvas.GetLeft(_snakeFood)) && (snakeHead.Position.Y == Canvas.GetTop(_snakeFood)))
+            {
+                EatSnakeFood();
+                return;
+            }
+
+            if ((snakeHead.Position.Y < 0) || (snakeHead.Position.Y >= GameArea.ActualHeight) ||
+            (snakeHead.Position.X < 0) || (snakeHead.Position.X >= GameArea.ActualWidth))
+            {
+                EndGame();
+            }
+
+            foreach (SnakePart snakeBodyPart in _snakeParts.Take(_snakeParts.Count - 1))
+            {
+                if ((snakeHead.Position.X == snakeBodyPart.Position.X) && (snakeHead.Position.Y == snakeBodyPart.Position.Y))
+                    EndGame();
+            }
+        }
+        private void EatSnakeFood()
+        {
+            _snakeLength++;
+            _currentScore++;
+            int timerInterval = Math.Max(SnakeSpeedThreshold, (int)_gameTickTimer.Interval.TotalMilliseconds - (_currentScore * 2));
+            _gameTickTimer.Interval = TimeSpan.FromMilliseconds(timerInterval);
+            GameArea.Children.Remove(_snakeFood);
+            DrawSnakeFood();
+            UpdateGameStatus();
+        }
+        private void UpdateGameStatus()
+        {
+            Title = "SnakeWPF - Score: " + _currentScore + " - Game speed: " + _gameTickTimer.Interval.TotalMilliseconds;
         }
     }
 }
