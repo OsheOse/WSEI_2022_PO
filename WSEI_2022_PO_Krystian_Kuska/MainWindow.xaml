@@ -46,6 +46,14 @@
                             <Button Margin="20,10" Name="btnShowHighscoreList" Click="BtnShowHighscoreList_Click" HorizontalAlignment="Center" Padding="10,3">HIGHSCORES</Button>
                         </StackPanel>
                     </Border>
+                    <Border BorderBrush="White" BorderThickness="2" Width="300" Height="320" Canvas.Left="50" Canvas.Top="40" x:Name="deathWindow" Panel.ZIndex="1">
+                        <StackPanel Orientation="Vertical" Background="White" x:Name="deathPanel">
+                            <TextBlock FontWeight="Bold" FontSize="48" HorizontalAlignment="Center" Margin="0,20,0,0">Snake Game</TextBlock>
+                            <TextBlock TextWrapping="Wrap" Margin="20" FontSize="22" HorizontalAlignment="Center" TextAlignment="Center">YOU DIED</TextBlock>
+                            <TextBlock TextWrapping="Wrap" Margin="20" FontSize="16" HorizontalAlignment="Center" TextAlignment="Center" x:Name="finalScore">SCORE: </TextBlock>
+                            <Button Margin="20,10" Name="restartBtn" Click="restartBtn_Click" HorizontalAlignment="Center" Padding="10,3">RESTART</Button>
+                        </StackPanel>
+                    </Border>
                 </Canvas>
             </Border>
         </Grid>

@@ -53,6 +53,7 @@ namespace WSEI_2022_PO_Krystian_Kuska
         private void Window_ContentRendered(object sender, EventArgs e)
         {
             DrawArea();
+            deathWindow.Visibility = Visibility.Hidden;
             if (startingWindow.Visibility != Visibility.Visible)
             {
                 StartNewGame();
@@ -87,6 +88,9 @@ namespace WSEI_2022_PO_Krystian_Kuska
         private void EndGame()
         {
             _gameTickTimer.IsEnabled = false;
+            deathWindow.Visibility = Visibility.Visible;
+            finalScore.Text = string.Empty;
+            finalScore.Text = "YOUR SCORE: " + _currentScore.ToString();
         }
         private void DrawArea()
         {
@@ -234,7 +238,7 @@ namespace WSEI_2022_PO_Krystian_Kuska
                     StartNewGame();
                     break;
             }
-            if (_snakeDirection != originalSnakeDirection)
+            if (_snakeDirection != originalSnakeDirection && _gameTickTimer.IsEnabled)
             {
                 MoveSnake();
             }
@@ -299,6 +303,14 @@ namespace WSEI_2022_PO_Krystian_Kuska
             {
                 return false;
             }
+        }
+
+        private void restartBtn_Click(object sender, RoutedEventArgs e)
+        {
+            _currentScore = 0;
+            deathWindow.Visibility = Visibility.Hidden;
+            startingWindow.Visibility = Visibility.Visible;
+            UpdateGameStatus();
         }
     }
 }
