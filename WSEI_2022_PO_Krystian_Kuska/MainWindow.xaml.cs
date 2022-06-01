@@ -157,7 +157,7 @@ namespace WSEI_2022_PO_Krystian_Kuska
                 snakePart.IsHead = false;
             }
 
-            SnakePart snakeHead = _snakeParts[_snakeParts.Count - 1];
+            SnakePart snakeHead = _snakeParts[^1];
             double nextX = snakeHead.Position.X;
             double nextY = snakeHead.Position.Y;
             switch (_snakeDirection)
@@ -245,7 +245,7 @@ namespace WSEI_2022_PO_Krystian_Kuska
         }
         private void DoCollisionCheck()
         {
-            SnakePart snakeHead = _snakeParts[_snakeParts.Count - 1];
+            SnakePart snakeHead = _snakeParts[^1];
 
             if ((snakeHead.Position.X == Canvas.GetLeft(_snakeFood)) && (snakeHead.Position.Y == Canvas.GetTop(_snakeFood)))
             {
