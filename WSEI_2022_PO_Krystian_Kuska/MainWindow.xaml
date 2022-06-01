@@ -37,7 +37,7 @@
         <Grid>
             <Border BorderBrush="Black" BorderThickness="4">
                 <Canvas Name="GameArea" ClipToBounds="True" Width="400" Height="400">
-                    <Border BorderBrush="White" BorderThickness="2" Width="300" Height="320" Canvas.Left="50" Canvas.Top="40" Name="startingWindow" Panel.ZIndex="1">
+                    <Border BorderBrush="White" BorderThickness="2" Width="300" Height="320" Canvas.Left="50" Canvas.Top="40" x:Name="startingWindow" Panel.ZIndex="1">
                         <StackPanel Orientation="Vertical" Background="White" x:Name="startingPanel">
                             <TextBlock FontWeight="Bold" FontSize="48" HorizontalAlignment="Center" Margin="0,20,0,0">Snake Game</TextBlock>
                             <TextBlock TextWrapping="Wrap" Margin="20" FontSize="16" HorizontalAlignment="Center" TextAlignment="Center">Use the Arrow keys to control the snake. Collect red dots to increase your score.</TextBlock>

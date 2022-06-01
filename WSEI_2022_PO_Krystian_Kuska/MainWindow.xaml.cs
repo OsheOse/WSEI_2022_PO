@@ -13,13 +13,13 @@ namespace WSEI_2022_PO_Krystian_Kuska
     public partial class MainWindow : Window
     {
         private DispatcherTimer _gameTickTimer = new();
-        Random rnd = new();
+        private Random _rnd = new();
 
         //Snake
-        const int SnakeStartLength = 3;
-        const int SnakeStartSpeed = 400;
-        const int SnakeSpeedThreshold = 200;
-        const int SnakeSquareSize = 20;
+        private const int _snakeStartLength = 3;
+        private const int _snakeStartSpeed = 400;
+        private const int _snakeSpeedThreshold = 200;
+        private const int _snakeSquareSize = 20;
         private SolidColorBrush _snakeBodyBrush = Brushes.Green;
         private SolidColorBrush _snakeHeadBrush = Brushes.YellowGreen;
         private List<SnakePart> _snakeParts = new();
@@ -32,8 +32,9 @@ namespace WSEI_2022_PO_Krystian_Kuska
         };
         private SnakeDirection _snakeDirection = SnakeDirection.Right;
         private int _snakeLength;
+
         //GameBoard
-        const int squareSize = 20;
+        private const int _squareSize = 20;
 
         //Food
         private UIElement _snakeFood = null;
@@ -52,7 +53,7 @@ namespace WSEI_2022_PO_Krystian_Kuska
         private void Window_ContentRendered(object sender, EventArgs e)
         {
             DrawArea();
-            if (!startingPanel.IsEnabled)
+            if (startingWindow.Visibility != Visibility.Visible)
             {
                 StartNewGame();
             }
@@ -60,6 +61,7 @@ namespace WSEI_2022_PO_Krystian_Kuska
         private void StartNewGame()
         {
             if (!CheckUsername()) return;
+            startingWindow.Visibility = Visibility.Hidden;
             foreach (SnakePart snakeBodyPart in _snakeParts)
             {
                 if (snakeBodyPart.UiElement != null)
@@ -73,10 +75,10 @@ namespace WSEI_2022_PO_Krystian_Kuska
                 GameArea.Children.Remove(_snakeFood);
             }
             _currentScore = 0;
-            _snakeLength = SnakeStartLength;
+            _snakeLength = _snakeStartLength;
             _snakeDirection = SnakeDirection.Right;
-            _snakeParts.Add(new SnakePart() { Position = new Point(SnakeSquareSize * 5, SnakeSquareSize * 5) });
-            _gameTickTimer.Interval = TimeSpan.FromMilliseconds(SnakeStartSpeed);
+            _snakeParts.Add(new SnakePart() { Position = new Point(_snakeSquareSize * 5, _snakeSquareSize * 5) });
+            _gameTickTimer.Interval = TimeSpan.FromMilliseconds(_snakeStartSpeed);
             DrawSnake();
             DrawSnakeFood();
             UpdateGameStatus();      
@@ -97,8 +99,8 @@ namespace WSEI_2022_PO_Krystian_Kuska
             {
                 Rectangle rect = new()
                 {
-                    Width = squareSize,
-                    Height = squareSize,
+                    Width = _squareSize,
+                    Height = _squareSize,
                     Fill = nextIsOdd ? Brushes.White : Brushes.Gray
                 };
                 GameArea.Children.Add(rect);
@@ -106,11 +108,11 @@ namespace WSEI_2022_PO_Krystian_Kuska
                 Canvas.SetLeft(rect, nextX);
 
                 nextIsOdd = !nextIsOdd;
-                nextX += squareSize;
+                nextX += _squareSize;
                 if (nextX >= GameArea.ActualWidth)
                 {
                     nextX = 0;
-                    nextY += squareSize;
+                    nextY += _squareSize;
                     rowCounter++;
                     nextIsOdd = (rowCounter % 2 != 0);
                 }
@@ -127,8 +129,8 @@ namespace WSEI_2022_PO_Krystian_Kuska
                 {
                     snakePart.UiElement = new Rectangle()
                     {
-                        Width = SnakeSquareSize,
-                        Height = SnakeSquareSize,
+                        Width = _snakeSquareSize,
+                        Height = _snakeSquareSize,
                         Fill = snakePart.IsHead ? _snakeHeadBrush : _snakeBodyBrush
                     };
                     GameArea.Children.Add(snakePart.UiElement);
@@ -157,16 +159,16 @@ namespace WSEI_2022_PO_Krystian_Kuska
             switch (_snakeDirection)
             {
                 case SnakeDirection.Left:
-                    nextX -= SnakeSquareSize;
+                    nextX -= _snakeSquareSize;
                     break;
                 case SnakeDirection.Right:
-                    nextX += SnakeSquareSize;
+                    nextX += _snakeSquareSize;
                     break;
                 case SnakeDirection.Up:
-                    nextY -= SnakeSquareSize;
+                    nextY -= _snakeSquareSize;
                     break;
                 case SnakeDirection.Down:
-                    nextY += SnakeSquareSize;
+                    nextY += _snakeSquareSize;
                     break;
             }
             _snakeParts.Add(new SnakePart()
@@ -179,10 +181,10 @@ namespace WSEI_2022_PO_Krystian_Kuska
         }
         private Point GetNextFoodPosition()
         {
-            int maxX = (int)(GameArea.ActualWidth / SnakeSquareSize);
-            int maxY = (int)(GameArea.ActualHeight / SnakeSquareSize);
-            int foodX = rnd.Next(0, maxX) * SnakeSquareSize;
-            int foodY = rnd.Next(0, maxY) * SnakeSquareSize;
+            int maxX = (int)(GameArea.ActualWidth / _snakeSquareSize);
+            int maxY = (int)(GameArea.ActualHeight / _snakeSquareSize);
+            int foodX = _rnd.Next(0, maxX) * _snakeSquareSize;
+            int foodY = _rnd.Next(0, maxY) * _snakeSquareSize;
 
             foreach (SnakePart snakePart in _snakeParts)
             {
@@ -199,8 +201,8 @@ namespace WSEI_2022_PO_Krystian_Kuska
             Point foodPosition = GetNextFoodPosition();
             _snakeFood = new Ellipse()
             {
-                Width = SnakeSquareSize,
-                Height = SnakeSquareSize,
+                Width = _snakeSquareSize,
+                Height = _snakeSquareSize,
                 Fill = _foodBrush
             };
             GameArea.Children.Add(_snakeFood);
@@ -263,7 +265,7 @@ namespace WSEI_2022_PO_Krystian_Kuska
         {
             _snakeLength++;
             _currentScore++;
-            int timerInterval = Math.Max(SnakeSpeedThreshold, (int)_gameTickTimer.Interval.TotalMilliseconds - (_currentScore * 2));
+            int timerInterval = Math.Max(_snakeSpeedThreshold, (int)_gameTickTimer.Interval.TotalMilliseconds - (_currentScore * 2));
             _gameTickTimer.Interval = TimeSpan.FromMilliseconds(timerInterval);
             GameArea.Children.Remove(_snakeFood);
             DrawSnakeFood();
