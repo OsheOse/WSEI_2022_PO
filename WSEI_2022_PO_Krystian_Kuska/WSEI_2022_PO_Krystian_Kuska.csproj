@@ -6,4 +6,24 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="SnakeDB.db" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="SnakeDB.db">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Dapper" Version="2.0.123" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System.Data.SQLite">
+      <HintPath>C:\Program Files (x86)\SQLite.NET\bin\System.Data.SQLite.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

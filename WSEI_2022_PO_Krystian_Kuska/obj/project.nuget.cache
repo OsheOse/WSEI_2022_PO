@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "ULyxuRBHauRAZ7IwrLRgZ+JLXH8LWBysgJUHI91BfbpqIh7jjTExgIL+d9YJsPlKKOmPfA+vuQih/yQi1kuyTQ==",
+  "dgSpecHash": "LOt0wA1zNSc14CLA++dGVV05vPlgjlxykbEmCjCGejFGgWlyzLfAszCOxU83CMGQtJdEvuI7QcGGilviLtcneQ==",
   "success": true,
   "projectFilePath": "D:\\VSProjects\\WSEI_2022_PO\\WSEI_2022_PO\\WSEI_2022_PO_Krystian_Kuska\\WSEI_2022_PO_Krystian_Kuska.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\kryst\\.nuget\\packages\\dapper\\2.0.123\\dapper.2.0.123.nupkg.sha512"
+  ],
   "logs": []
 }

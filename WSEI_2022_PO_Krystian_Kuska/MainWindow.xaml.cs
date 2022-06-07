@@ -291,7 +291,8 @@ namespace WSEI_2022_PO_Krystian_Kuska
 
         private void BtnShowHighscoreList_Click(object sender, RoutedEventArgs e)
         {
-
+            HighscoresWindow highscoresWindow = new();
+            highscoresWindow.Show();
         }
         private bool CheckUsername()
         {
