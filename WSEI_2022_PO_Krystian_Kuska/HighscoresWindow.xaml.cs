@@ -14,10 +14,6 @@ namespace WSEI_2022_PO_Krystian_Kuska
             InitializeComponent();
             LoadPlayers();
         }
-        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            DragMove();
-        }
         private void LoadPlayers()
         {
             _players = _sql.LoadPlayers();
@@ -27,6 +23,10 @@ namespace WSEI_2022_PO_Krystian_Kuska
                 highscoresList.Items.Add($"{place}. " + player.Nickname.ToString());
                 place++;
             }
+        }
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            DragMove();
         }
         private void BtnClose_Click(object sender, RoutedEventArgs e)
         {

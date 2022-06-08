@@ -1,0 +1,51 @@
+﻿<Window x:Class="WSEI_2022_PO_Krystian_Kuska.AdminWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WSEI_2022_PO_Krystian_Kuska"
+        mc:Ignorable="d"
+        Title="AdminWindow" 
+        Height="500" 
+        Width="400"
+        SizeToContent="WidthAndHeight"
+        ResizeMode="NoResize"
+        WindowStyle="None"
+        Background="Black"
+        MouseDown="Window_MouseDown">
+    <DockPanel>
+        <Grid DockPanel.Dock="Top" Name="pnlTitleBar">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Grid.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="FontFamily" Value="Consolas" />
+                    <Setter Property="Foreground" Value="White" />
+                    <Setter Property="FontSize" Value="24" />
+                    <Setter Property="FontWeight" Value="Bold" />
+                </Style>
+            </Grid.Resources>
+            <WrapPanel Margin="10,0,0,0">
+                <TextBlock>ADMIN PANEL</TextBlock>
+            </WrapPanel>
+            <Button Grid.Column="2" DockPanel.Dock="Right" Background="Transparent" Foreground="White" FontWeight="Bold" FontSize="20" BorderThickness="0" Name="btnClose" Click="BtnClose_Click" Padding="10,0">X</Button>
+        </Grid>
+        <Grid>
+            <StackPanel Orientation="Vertical" Background="White" x:Name="adminPanel" Margin="30">
+                <TextBlock FontWeight="Bold" FontSize="20" HorizontalAlignment="Center" Margin="0,110,0,0">ADMIN PANEL</TextBlock>
+                <Label HorizontalAlignment="Center" Margin="10,10,10,0">USERNAME</Label>
+                <TextBox Text="admin" TextWrapping="Wrap" Width="120" x:Name="usernameText"/>
+                <Label HorizontalAlignment="Center" Margin="10,10,10,0">PASSWORD</Label>
+                <PasswordBox Width="120" x:Name="passwordText" PasswordChar="*"/>
+                <Button Margin="20,10" x:Name="restartBtn" Click="LoginBtn_Click" HorizontalAlignment="Center" Padding="10,3">
+                    <TextBlock Text="Login" TextWrapping="Wrap"/>
+                </Button>
+            </StackPanel>
+        </Grid>
+    </DockPanel>
+</Window>
+
+
