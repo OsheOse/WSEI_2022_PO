@@ -321,5 +321,10 @@ namespace WSEI_2022_PO_Krystian_Kuska
             startingWindow.Visibility = Visibility.Visible;
             UpdateGameStatus();
         }
+
+        private void BtnSettings_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

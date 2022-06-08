@@ -33,6 +33,11 @@
                 <TextBlock Name="tbStatusScore">0</TextBlock>
             </WrapPanel>
             <Button Grid.Column="2" DockPanel.Dock="Right" Background="Transparent" Foreground="White" FontWeight="Bold" FontSize="20" BorderThickness="0" Name="btnClose" Click="BtnClose_Click" Padding="10,0">X</Button>
+            <Button Grid.Column="1" DockPanel.Dock="Right" Background="Transparent" Name="btnSettings" Click="BtnSettings_Click" Height="30" Width="30" Padding="6" Margin="140,2,20,0" BorderBrush="Transparent">
+                <StackPanel>
+                    <Image Source="./Images/settings_icon.png"/>
+                </StackPanel>
+            </Button>
         </Grid>
         <Grid>
             <Border BorderBrush="Black" BorderThickness="4">
@@ -50,7 +55,7 @@
                         <StackPanel Orientation="Vertical" Background="White" x:Name="deathPanel">
                             <TextBlock FontWeight="Bold" FontSize="48" HorizontalAlignment="Center" Margin="0,20,0,0">Snake Game</TextBlock>
                             <TextBlock TextWrapping="Wrap" Margin="20" FontSize="22" HorizontalAlignment="Center" TextAlignment="Center">YOU DIED</TextBlock>
-                            <TextBlock TextWrapping="Wrap" Margin="20" FontSize="16" HorizontalAlignment="Center" TextAlignment="Center" x:Name="finalScore">SCORE: </TextBlock>
+                            <TextBlock TextWrapping="Wrap" Margin="20" FontSize="16" HorizontalAlignment="Center" TextAlignment="Center" x:Name="finalScore">SCORE:</TextBlock>
                             <Button Margin="20,10" Name="restartBtn" Click="RestartBtn_Click" HorizontalAlignment="Center" Padding="10,3">RESTART</Button>
                         </StackPanel>
                     </Border>
