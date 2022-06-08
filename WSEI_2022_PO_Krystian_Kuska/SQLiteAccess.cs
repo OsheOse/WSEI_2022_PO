@@ -9,29 +9,50 @@ namespace WSEI_2022_PO_Krystian_Kuska
 {
     public class SQLiteAccess
     {
-        public static List<PlayerModel> LoadPlayers()
+        public List<PlayerDataModel> LoadPlayers()
         {
-            using (IDbConnection conn = new SQLiteConnection(LoadConnString()))
+            using IDbConnection conn = new SQLiteConnection(LoadConnString());
+            var output = conn.Query<PlayerDataModel>("SELECT * FROM PlayerDataModel;");
+            return output.ToList();
+        }
+        public void SavePlayer(PlayerDataModel player, int score)
+        {
+            using IDbConnection conn = new SQLiteConnection(LoadConnString());
+            bool doesPlayerExist = conn.Query<int>($"SELECT COUNT(*) FROM PlayerDataModel WHERE Nickname LIKE '{player.Nickname}';").FirstOrDefault() == 0;
+            if (!doesPlayerExist)
             {
-                var output = conn.Query<PlayerModel>("SELECT * FROM Players;", new DynamicParameters());
-                return output.ToList();
+                CheckIfBetterScore(player, score);
+            }
+            else
+            {
+                conn.Execute("INSERT INTO PlayerDataModel (Nickname) VALUES (@Nickname);", player);
+                OverrideScore(player, score);
             }
         }
-        public static void SavePlayer(PlayerModel player)
+        public void DeletePlayer(string nickname)
         {
-            using (IDbConnection conn = new SQLiteConnection(LoadConnString()))
+            using IDbConnection conn = new SQLiteConnection(LoadConnString());
+            conn.Execute($"DELETE FORM Players WHERE nickname = {nickname};");
+        }
+        private void CheckIfBetterScore(PlayerDataModel player, int score)
+        {
+            using IDbConnection conn = new SQLiteConnection(LoadConnString());
+            var output = conn.Query<int>($"SELECT s.Score FROM Scores s JOIN PlayerDataModel p ON s.PlayerID = p.ID WHERE p.ID = {player.ID}");
+            if (score <= output.FirstOrDefault())
             {
-                conn.Execute("INSERT INTO Players (Nickname) VALUES (@Nickname);", player);
+                return;
+            }
+            else
+            {
+                OverrideScore(player, score);
             }
         }
-        public static void DeletePlayer(string nickname)
+        private void OverrideScore(PlayerDataModel player, int newScore)
         {
-            using (IDbConnection conn = new SQLiteConnection(LoadConnString()))
-            {
-                conn.Execute($"DELETE FORM Players WHERE nickname = {nickname};");
-            }
+            using IDbConnection conn = new SQLiteConnection(LoadConnString());
+            conn.Execute($"UPDATE Scores SET Score = {newScore} WHERE PlayerID = {player.ID};");
         }
-        private static string LoadConnString(string name = "SnakeConnString")
+        private string LoadConnString(string name = "SnakeConnString")
         {
             return ConfigurationManager.ConnectionStrings[name].ConnectionString;
         }

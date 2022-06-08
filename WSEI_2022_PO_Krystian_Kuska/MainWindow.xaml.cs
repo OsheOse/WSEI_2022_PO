@@ -12,17 +12,20 @@ namespace WSEI_2022_PO_Krystian_Kuska
 {
     public partial class MainWindow : Window
     {
-        private DispatcherTimer _gameTickTimer = new();
-        private Random _rnd = new();
+        //SQLite
+        private SQLiteAccess _sql = new();
+
+        private readonly DispatcherTimer _gameTickTimer = new();
+        private readonly Random _rnd = new();
 
         //Snake
         private const int _snakeStartLength = 3;
         private const int _snakeStartSpeed = 400;
         private const int _snakeSpeedThreshold = 200;
         private const int _snakeSquareSize = 20;
-        private SolidColorBrush _snakeBodyBrush = Brushes.Green;
-        private SolidColorBrush _snakeHeadBrush = Brushes.YellowGreen;
-        private List<SnakePart> _snakeParts = new();
+        private readonly SolidColorBrush _snakeBodyBrush = Brushes.Green;
+        private readonly SolidColorBrush _snakeHeadBrush = Brushes.YellowGreen;
+        private readonly List<SnakePart> _snakeParts = new();
         public enum SnakeDirection
         {
             Left,
@@ -38,8 +41,11 @@ namespace WSEI_2022_PO_Krystian_Kuska
 
         //Food
         private UIElement _snakeFood = null;
-        private SolidColorBrush _foodBrush = Brushes.Red;
+        private readonly SolidColorBrush _foodBrush = Brushes.Red;
         private int _currentScore = 0;
+
+        //Player
+        readonly PlayerDataModel _newPlayer = new();
 
         public MainWindow()
         {
@@ -84,6 +90,8 @@ namespace WSEI_2022_PO_Krystian_Kuska
             DrawSnakeFood();
             UpdateGameStatus();      
             _gameTickTimer.IsEnabled = true;
+            
+            _newPlayer.Nickname = username.Text;
         }
         private void EndGame()
         {
@@ -91,6 +99,7 @@ namespace WSEI_2022_PO_Krystian_Kuska
             deathWindow.Visibility = Visibility.Visible;
             finalScore.Text = string.Empty;
             finalScore.Text = "YOUR SCORE: " + _currentScore.ToString();
+            _sql.SavePlayer(_newPlayer,_currentScore);
         }
         private void DrawArea()
         {
@@ -305,8 +314,7 @@ namespace WSEI_2022_PO_Krystian_Kuska
                 return false;
             }
         }
-
-        private void restartBtn_Click(object sender, RoutedEventArgs e)
+        private void RestartBtn_Click(object sender, RoutedEventArgs e)
         {
             _currentScore = 0;
             deathWindow.Visibility = Visibility.Hidden;

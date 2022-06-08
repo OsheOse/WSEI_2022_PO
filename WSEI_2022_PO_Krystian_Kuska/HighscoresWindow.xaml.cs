@@ -1,27 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+
 
 namespace WSEI_2022_PO_Krystian_Kuska
 {
-    /// <summary>
-    /// Interaction logic for HighscoresWindow.xaml
-    /// </summary>
     public partial class HighscoresWindow : Window
     {
+        private readonly SQLiteAccess _sql = new();
+        List<PlayerDataModel> _players = new();
         public HighscoresWindow()
         {
             InitializeComponent();
+            LoadPlayers();
+        }
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            DragMove();
+        }
+        private void LoadPlayers()
+        {
+            _players = _sql.LoadPlayers();
+            int place = 1;
+            foreach (PlayerDataModel player in _players)
+            {
+                highscoresList.Items.Add($"{place}. " + player.Nickname.ToString());
+                place++;
+            }
+        }
+        private void BtnClose_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }
