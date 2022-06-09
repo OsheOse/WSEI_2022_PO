@@ -10,6 +10,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "SnakeSetup", "..\SnakeSetup\SnakeSetup.vdproj", "{195062F0-37C3-46B2-B025-AE7AA48B1B34}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,9 +19,11 @@ Global
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{B3E26E98-2490-4910-A1C5-E764C75AF3A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B3E26E98-2490-4910-A1C5-E764C75AF3A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B3E26E98-2490-4910-A1C5-E764C75AF3A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B3E26E98-2490-4910-A1C5-E764C75AF3A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{195062F0-37C3-46B2-B025-AE7AA48B1B34}.Debug|Any CPU.ActiveCfg = Release
+		{195062F0-37C3-46B2-B025-AE7AA48B1B34}.Debug|Any CPU.Build.0 = Release
+		{195062F0-37C3-46B2-B025-AE7AA48B1B34}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
