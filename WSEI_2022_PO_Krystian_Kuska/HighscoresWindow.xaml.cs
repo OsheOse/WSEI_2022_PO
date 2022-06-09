@@ -17,6 +17,7 @@ namespace WSEI_2022_PO_Krystian_Kuska
         }
         private void LoadPlayers()
         {
+            highscoresList.Items.Clear();
             _players = _sql.LoadPlayers();
             List<PlayerWithScore> playersWithScores = new();
             int place = 1;

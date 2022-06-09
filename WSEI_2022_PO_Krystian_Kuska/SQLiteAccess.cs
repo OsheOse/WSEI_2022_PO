@@ -39,7 +39,9 @@ namespace WSEI_2022_PO_Krystian_Kuska
         public void DeletePlayer(string nickname)
         {
             using IDbConnection conn = new SQLiteConnection(LoadConnString());
-            conn.Execute($"DELETE FORM Players WHERE nickname = {nickname};");
+            int playerID = conn.Query<int>($"SELECT ID FROM PlayerDataModel WHERE Nickname = '{nickname}'").FirstOrDefault();
+            conn.Execute($"DELETE FROM Scores WHERE PlayerID = {playerID}");
+            conn.Execute($"DELETE FROM PlayerDataModel WHERE Nickname = '{nickname}';");
         }
         private void CheckIfBetterScore(PlayerDataModel player, int score)
         {
