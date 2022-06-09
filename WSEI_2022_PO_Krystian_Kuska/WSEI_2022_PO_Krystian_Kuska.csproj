@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="MainWindow\settings_icon.png" />
     <None Remove="settings_icon.png" />
     <None Remove="SnakeDB.db" />
   </ItemGroup>
@@ -23,7 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Images\settings_icon.png" />
+    <Resource Include="MainWindow\settings_icon.png" />
   </ItemGroup>
 
 </Project>

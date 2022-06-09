@@ -17,7 +17,7 @@
     <Page Update="HighscoresWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="MainWindow.xaml">
+    <Page Update="MainWindow\MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

@@ -324,7 +324,8 @@ namespace WSEI_2022_PO_Krystian_Kuska
 
         private void BtnSettings_Click(object sender, RoutedEventArgs e)
         {
-
+            AdminWindow adminWindow = new();
+            adminWindow.Show();
         }
     }
 }

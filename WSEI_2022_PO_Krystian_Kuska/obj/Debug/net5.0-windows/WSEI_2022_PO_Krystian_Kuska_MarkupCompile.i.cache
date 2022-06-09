@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET5_0;NETCOREAPP
 D:\VSProjects\WSEI_2022_PO\WSEI_2022_PO\WSEI_2022_PO_Krystian_Kuska\App.xaml
-3-2056414228
+3-1444415039
 1-1987748454
-10-2047984970
+11-1306319868
 195-332600401
-AdminWindow.xaml;HighscoresWindow.xaml;MainWindow.xaml;
+AdminWindow.xaml;HighscoresWindow.xaml;MainWindow\MainWindow.xaml;
 
 False
 

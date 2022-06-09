@@ -17,5 +17,10 @@ namespace WSEI_2022_PO_Krystian_Kuska
         {
             DragMove();
         }
+
+        private void LoginBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
