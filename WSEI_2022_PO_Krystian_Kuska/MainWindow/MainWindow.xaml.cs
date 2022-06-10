@@ -271,7 +271,9 @@ namespace WSEI_2022_PO_Krystian_Kuska
             foreach (SnakePart snakeBodyPart in _snakeParts.Take(_snakeParts.Count - 1))
             {
                 if ((snakeHead.Position.X == snakeBodyPart.Position.X) && (snakeHead.Position.Y == snakeBodyPart.Position.Y))
+                {
                     EndGame();
+                }
             }
         }
         private void EatSnakeFood()
