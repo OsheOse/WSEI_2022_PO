@@ -8,7 +8,7 @@ using System;
 
 namespace WSEI_2022_PO_Krystian_Kuska
 {
-    public class SQLiteAccess
+    public class SQLiteAccessUnitTests
     {
         //Returns list of all players
         public List<PlayerDataModel> LoadPlayers()

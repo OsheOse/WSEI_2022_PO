@@ -6,7 +6,7 @@ namespace WSEI_2022_PO_Krystian_Kuska
 {
     public partial class AdminWindow : Window
     {
-        SQLiteAccess _sql = new();
+        SQLiteAccessUnitTests _sql = new();
         List<PlayerDataModel> players = new();
         public AdminWindow()
         {

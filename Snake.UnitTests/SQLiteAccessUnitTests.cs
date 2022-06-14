@@ -10,7 +10,7 @@ namespace Snake.UnitTests
         public void LoadPlayerScores_NegativeValue_ReturnsArgumentOutOfRangeException()
         {
             //ARRANGE
-            var sqlite = new SQLiteAccess();
+            var sqlite = new SQLiteAccessUnitTests();
             //ACT + ASSERT
             Assert.Throws<ArgumentOutOfRangeException>(() => sqlite.LoadPlayersScores(-1));
         }
@@ -18,7 +18,7 @@ namespace Snake.UnitTests
         public void SavePlayer_NullPlayer_ReturnsArgumentNullException()
         {
             //ARRANGE
-            var sqlite = new SQLiteAccess();
+            var sqlite = new SQLiteAccessUnitTests();
             //ACT + ASSERT
             Assert.Throws<ArgumentNullException>(() => sqlite.SavePlayer(null, 1));
         }
@@ -26,7 +26,7 @@ namespace Snake.UnitTests
         public void SavePlayer_NegativeScore_ReturnsArgumentOutOfRangeException()
         {
             //ARRANGE
-            var sqlite = new SQLiteAccess();
+            var sqlite = new SQLiteAccessUnitTests();
             PlayerDataModel player = new();
             //ACT + ASSERT
             Assert.Throws<ArgumentOutOfRangeException>(() => sqlite.SavePlayer(player, -1));
@@ -35,7 +35,7 @@ namespace Snake.UnitTests
         public void DeletePlayer_EmptyNickname_ReturnsArgumentNullException()
         {
             //ARRANGE
-            var sqlite = new SQLiteAccess();
+            var sqlite = new SQLiteAccessUnitTests();
             //ACT + ASSERT
             Assert.Throws<ArgumentNullException>(() => sqlite.DeletePlayer(""));
         }
@@ -43,7 +43,7 @@ namespace Snake.UnitTests
         public void DeletePlayer_NullNickname_ReturnsArgumentNullException()
         {
             //ARRANGE
-            var sqlite = new SQLiteAccess();
+            var sqlite = new SQLiteAccessUnitTests();
             //ACT + ASSERT
             Assert.Throws<ArgumentNullException>(() => sqlite.DeletePlayer(null));
         }
@@ -51,7 +51,7 @@ namespace Snake.UnitTests
         public void DeletePlayer_WhiteSpacesNickname_ReturnsArgumentNullException()
         {
             //ARRANGE
-            var sqlite = new SQLiteAccess();
+            var sqlite = new SQLiteAccessUnitTests();
             //ACT + ASSERT
             Assert.Throws<ArgumentNullException>(() => sqlite.DeletePlayer("           "));
         }

@@ -8,7 +8,7 @@ namespace WSEI_2022_PO_Krystian_Kuska
 {
     public partial class HighscoresWindow : Window
     {
-        private readonly SQLiteAccess _sql = new();
+        private readonly SQLiteAccessUnitTests _sql = new();
         List<PlayerDataModel> _players = new();
         public HighscoresWindow()
         {

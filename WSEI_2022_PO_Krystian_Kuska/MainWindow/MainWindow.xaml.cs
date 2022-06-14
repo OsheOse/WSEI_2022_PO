@@ -13,7 +13,7 @@ namespace WSEI_2022_PO_Krystian_Kuska
     public partial class MainWindow : Window
     {
         //SQLite
-        private SQLiteAccess _sql = new();
+        private SQLiteAccessUnitTests _sql = new();
 
         private readonly DispatcherTimer _gameTickTimer = new();
         private readonly Random _rnd = new();
