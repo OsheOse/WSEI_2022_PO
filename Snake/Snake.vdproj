@@ -15,7 +15,7 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_5019872CF66947ACB994885544B3F9F1"
+        "MsmKey" = "8:_E0917045A9604436A87B7B3A1BFE3358"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -43,6 +43,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
         "Release"
         {
@@ -59,6 +67,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
     }
     "Deployable"
@@ -90,9 +106,9 @@
         }
         "File"
         {
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5019872CF66947ACB994885544B3F9F1"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E0917045A9604436A87B7B3A1BFE3358"
             {
-            "SourcePath" = "8:C:\\Users\\kryst\\Desktop\\snake_cion.ico"
+            "SourcePath" = "8:snake_icon.ico"
             "TargetName" = "8:snake_icon.ico"
             "Tag" = "8:"
             "Folder" = "8:_16D46963B70A4F5480A0907ECDD1949D"
@@ -287,7 +303,7 @@
         }
         "Shortcut"
         {
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_8D1D87ACAEC64DE394E00FB299258803"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_0D9EF39FB2EA40A0833EE16593202C8E"
             {
             "Name" = "8:Snake"
             "Arguments" = "8:"
@@ -298,7 +314,7 @@
             "Target" = "8:_E90D4F1DA59E4798884FF169622F7A77"
             "Folder" = "8:_6065BBD9BBD54C3EBC2116360ACEF395"
             "WorkingFolder" = "8:_16D46963B70A4F5480A0907ECDD1949D"
-            "Icon" = "8:_5019872CF66947ACB994885544B3F9F1"
+            "Icon" = "8:_E0917045A9604436A87B7B3A1BFE3358"
             "Feature" = "8:"
             }
         }
